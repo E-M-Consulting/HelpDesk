@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "pf2n4ml50a");
+    </script>
+</head>
+<body class="signin-page">
+    <div id="header-placeholder" class="full-width"></div>
+
+    <div id="main-content" class="main-content">
+        <img src="images/techgusty.png" alt="Tech Gusty" class="techgusty-logo">
+        <div id="content" class="content-center">
+            <button id="signInButton">Sign In</button>
+        </div>
+    </div>
+
+    <div id="footer-placeholder" class="footer-placeholder"></div>
+
+    <script src="loadSigninHeaderFooter.js"></script>
+    <script>
+        const msalConfig = {
+            auth: {
+                clientId: '4bbc56d1-764a-4852-8e0a-f5f8d1aebd6a',
+                authority: 'https://login.microsoftonline.com/bcb6fc16-659f-41d3-98c9-5c276e196944',
+                redirectUri: '/helpdesk/home.html'
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        document.getElementById('signInButton').addEventListener('click', () => {
+            msalInstance.loginRedirect({
+                scopes: ["user.read", "GroupMember.Read.All"]
+            });
+        });
+
+        msalInstance.handleRedirectPromise().then(response => {
+            if (response) {
+                sessionStorage.setItem('isAuthenticated', 'true');
+                sessionStorage.setItem('msalAccount', JSON.stringify(response.account));
+                window.location.href = '/helpdesk/home';
+            } else {
+                const account = msalInstance.getAllAccounts()[0];
+                if (account || sessionStorage.getItem('isAuthenticated') === 'true') {
+                    window.location.href = '/helpdesk/home';
+                }
+            }
+        }).catch(error => {
+            console.error('Error during authentication:', error);
+        });
+    </script>
+</body>
+</html>

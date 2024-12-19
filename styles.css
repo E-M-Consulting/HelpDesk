@@ -1,0 +1,505 @@
+@font-face {
+    font-family: 'Univers';
+    src: url('fonts/UniversLTStd.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'UniversBold';
+    src: url('fonts/UniversLTStd-Bold.otf') format('opentype');
+}
+
+body {
+    font-family: 'Univers', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+header, footer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #f8f9fa;
+    color: black;
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 80px;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.company-logo {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.company-name {
+    font-size: 1.2em;
+    font-family: 'UniversBold', Arial, sans-serif;
+}
+
+.company-info a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+.company-info a:hover .company-name {
+    text-decoration: underline;
+}
+
+.contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 25px;
+    cursor: pointer;
+    margin-right: 1em;
+    background-color: #1187d9;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    position: absolute;
+    right: 70px;
+    text-align: center;
+    line-height: 25px;
+    padding: 1px 0 0 0;
+}
+
+.contact-button:hover {
+    background-color: #005a9e;
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    margin-right: 1em;
+    position: absolute;
+    right: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    background-color: #ddd;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    transition: all 0.3s ease;
+}
+
+.nav-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 1em;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu ul li {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-menu ul li a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-menu ul li a:hover {
+    background-color: #ddd;
+}
+
+.nav-menu.show {
+    display: block;
+}
+
+.nav-menu ul ul {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 100%;
+    top: 0;
+}
+
+.nav-menu ul li:hover > ul {
+    display: block;
+}
+
+.nav-menu ul ul li {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-menu ul ul li a {
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-menu ul ul li a:hover {
+    background-color: #ddd;
+}
+
+.nav-header {
+    padding: 1em;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #ddd;
+    cursor: default;
+}
+
+.nav-header:hover {
+    background-color: #e0e0e0;
+}
+
+.nav-subitem {
+    padding-left: 2em;
+}
+
+.nav-subitem a {
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-subitem a:hover {
+    background-color: #ddd;
+}
+
+.nav-item {
+    padding-left: 1em;
+}
+
+.nav-item a {
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-item a:hover {
+    background-color: #ddd;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #292929;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-left, .footer-right {
+    flex: 1;
+    font-size: small;
+    font-weight: bold;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-center {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-button {
+    color: white;
+    text-decoration: none;
+    margin-left: 1em;
+}
+
+.footer-center a {
+    display: inline-block;
+}
+
+.footer-center img {
+    width: auto;
+    height: 40px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+}
+
+.footer-center img {
+    width: auto;
+    height: 40px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    background-color: #f0f0f0;
+    padding: 1em;
+    border-radius: 8px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), background-image 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+}
+
+.button img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.button span {
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    background-size: cover;
+    background-position: center;
+    background-color: #e0e0e0;
+}
+
+.button:hover img {
+    opacity: 0;
+}
+
+.button:nth-child(1):hover {
+    background-image: url('images/mainit2.png');
+}
+
+.button:nth-child(2):hover {
+    background-image: url('images/LPticket2.png');
+}
+
+.button:nth-child(3):hover {
+    background-image: url('images/SFticket2.png');
+}
+
+#signInButton {
+    padding: 10px 20px;
+    background-color: #1187d9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    max-width: 200px;
+}
+
+#signInButton:hover {
+    background-color: #005a9e;
+}
+
+body.signin-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f2f1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#content {
+    text-align: center;
+    background-color: white;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#content .company-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#content .company-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1187d9;
+}
+
+.contact-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 100px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1em;
+}
+
+.contact-menu.show {
+    display: block;
+}
+
+.scrolling-message {
+    background-color: #1187d9;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+}
+
+.scrolling-message marquee {
+    width: 100%;
+}
+
+.page-title {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.banner {
+    margin-bottom: 40px;
+    width: 865px;
+    height: 173px;
+    background-image: url('images/helpbanner.png');
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 600px) {
+    .banner {
+        background-image: url('images/helpbannersmall.png');
+        width: 100%;
+        height: auto;
+    }
+}
+
+.user-info {
+    display: none;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.techgusty-logo {
+    margin-right: 10px;
+    width: 560px;
+    height: 589px;
+}
+
+#main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
