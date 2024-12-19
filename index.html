@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Sign In</title>
+    <title>IT Help Desk</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
     <script type="text/javascript">
@@ -15,19 +15,29 @@
         })(window, document, "clarity", "script", "pf2n4ml50a");
     </script>
 </head>
-<body class="signin-page">
-    <div id="header-placeholder" class="full-width"></div>
+<body>
+    <div id="header-placeholder"></div>
 
-    <div id="main-content" class="main-content">
-        <img src="images/techgusty.png" alt="Tech Gusty" class="techgusty-logo">
-        <div id="content" class="content-center">
-            <button id="signInButton">Sign In</button>
+    <div class="scrolling-message" id="marquee-placeholder"></div>
+
+    <main id="main-content">
+        <div class="banner"></div>
+        <div class="button-container">
+            <a href="https://forms.office.com/r/xunK5Cj8cf" class="button" aria-label="Main IT Form" target="_blank" rel="noopener">
+                <img src="images/mainit1.png" alt="Main IT Form">
+            </a>
+            <a href="https://forms.office.com/r/E4v0tWrq0f" class="button" aria-label="LP Ticket Form" target="_blank" rel="noopener">
+                <img src="images/LPticket1.png" alt="LP Ticket Form">
+            </a>
+            <a href="https://forms.office.com/r/1tJ7vWxRtu" class="button" aria-label="SF Ticket Form" target="_blank" rel="noopener">
+                <img src="images/SFticket1.png" alt="SF Ticket Form">
+            </a>
         </div>
-    </div>
+    </main>
 
-    <div id="footer-placeholder" class="footer-placeholder"></div>
+    <div id="footer-placeholder"></div>
 
-    <script src="loadSigninHeaderFooter.js"></script>
+    <script src="loadHeaderFooter.js"></script>
     <script>
         const msalConfig = {
             auth: {
@@ -38,26 +48,34 @@
         };
 
         const msalInstance = new msal.PublicClientApplication(msalConfig);
+        const account = JSON.parse(sessionStorage.getItem('msalAccount'));
 
-        document.getElementById('signInButton').addEventListener('click', () => {
-            msalInstance.loginRedirect({
-                scopes: ["user.read", "GroupMember.Read.All"]
+        if (account) {
+            msalInstance.acquireTokenSilent({
+                account: account,
+                scopes: ["user.read"]
+            }).then(tokenResponse => {
+                console.log('Token acquired silently:', tokenResponse);
+            }).catch(error => {
+                console.error('Error acquiring token silently:', error);
             });
-        });
+        }
 
-        msalInstance.handleRedirectPromise().then(response => {
-            if (response) {
-                sessionStorage.setItem('isAuthenticated', 'true');
-                sessionStorage.setItem('msalAccount', JSON.stringify(response.account));
-                window.location.href = '/helpdesk/home';
+        loadHTML('marquee.html', 'marquee-placeholder').then(() => {
+            const marqueeText = document.getElementById('marquee-text');
+            const marqueeContent = marqueeText.textContent;
+
+            if (marqueeContent.startsWith('[!]')) {
+                marqueeText.textContent = marqueeContent.substring(3);
+                marqueeText.parentElement.style.backgroundColor = 'red';
+            } else if (marqueeContent.startsWith('[c]')) {
+                marqueeText.textContent = marqueeContent.substring(3);
+                marqueeText.parentElement.style.backgroundColor = 'yellow';
+                marqueeText.style.color = 'black';
             } else {
-                const account = msalInstance.getAllAccounts()[0];
-                if (account || sessionStorage.getItem('isAuthenticated') === 'true') {
-                    window.location.href = '/helpdesk/home';
-                }
+                marqueeText.parentElement.style.backgroundColor = '#1187d9';
+                marqueeText.style.color = 'white';
             }
-        }).catch(error => {
-            console.error('Error during authentication:', error);
         });
     </script>
 </body>
