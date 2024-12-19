@@ -27,28 +27,6 @@
 
     <script src="loadHeaderFooter.js"></script>
     <script>
-        const msalConfig = {
-            auth: {
-                clientId: '4bbc56d1-764a-4852-8e0a-f5f8d1aebd6a',
-                authority: 'https://login.microsoftonline.com/bcb6fc16-659f-41d3-98c9-5c276e196944',
-                redirectUri: 'https://reserveyourad.com/helpdesk/home.html'
-            }
-        };
-
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
-        const account = JSON.parse(sessionStorage.getItem('msalAccount'));
-
-        if (account) {
-            msalInstance.acquireTokenSilent({
-                account: account,
-                scopes: ["user.read"]
-            }).then(tokenResponse => {
-                console.log('Token acquired silently:', tokenResponse);
-            }).catch(error => {
-                console.error('Error acquiring token silently:', error);
-            });
-        }
-
         loadHTML('managementtable.html', 'form-list-placeholder');
     </script>
 </body>
